@@ -1,0 +1,56 @@
+\documentclass[UTF8,a4paper,twoside]{ctexart}
+
+% 页面设置
+% A4纸张大小 上下左边边距参考Word中"普通"类型
+\usepackage{geometry}	
+\geometry{left=3.18cm, right=3.18cm, top=2.54cm, bottom=2.54cm}
+% 设置首行缩进2字符
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+% 字体设置
+\usepackage{fontspec}
+% 在cmd中输入fc-list :lang=en >> d:\font.txt可以获取电脑中所有英文字体
+% 在cmd中输入fc-list :lang=zh >> d:\font.txt可以获取电脑中所有中文字体
+\setmainfont{Times New Roman}						% 缺省英文字体为Times New Roman
+\setCJKmainfont[BoldFont=SimHei]{FangSong}			% 缺省中文字体为 仿宋
+													% 粗体为中文字体 黑体
+\setCJKfamilyfont{fs}{FangSong}
+\newcommand{\zhengwen}{\CJKfamily{fs}\zihao{-4}}	% 正文字体 仿宋小4号
+
+% 行距设置
+\usepackage{setspace}
+\linespread{1.5}\selectfont		% 1.5倍字号，这与word中的1.5倍行距有一点差别
+
+% 多级标题设置
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}		% 设置标题层次共4层
+\titleformat{\section}[block]{\centering\zihao{3}\bfseries}{\chinese{section}、}{0pt}{}
+\titleformat{\subsection}[block]{\zihao{-3}\bfseries}{\arabic{subsection}}{0.5em}{}
+\titleformat{\subsubsection}[block]{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}}{0.5em}{}
+\titleformat{\paragraph}{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}{0.5em}{}
+
+
+\begin{document}
+	
+	\zhengwen
+	\section{第一节}
+	 	
+	\subsection{第一小节}
+	这是\LaTeX。
+		
+	\noindent 测试测试
+	
+	\subsubsection{第一小小节}
+	测试
+	
+	\paragraph{第一段}
+	\noindent 测试测试
+	
+	\section{第二节}
+	结果是
+	
+	\section{第三节}
+		
+
+\end{document}
