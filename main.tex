@@ -17,6 +17,8 @@
 													% 粗体为中文字体 黑体
 \setCJKfamilyfont{fs}{FangSong}
 \newcommand{\zhengwen}{\CJKfamily{fs}\zihao{-4}}	% 正文字体 仿宋小4号
+\setCJKfamilyfont{STfs}{STFangsong}
+\newcommand{\cover}{\CJKfamily{STfs}\zihao{3}}
 
 % 行距设置
 \usepackage{setspace}
@@ -29,10 +31,22 @@
 \titleformat{\subsection}[block]{\zihao{-3}\bfseries}{\arabic{subsection}}{0.5em}{}
 \titleformat{\subsubsection}[block]{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}}{0.5em}{}
 \titleformat{\paragraph}{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}{0.5em}{}
+% 设置段间距
+\titlespacing{\section}{0pt}{12pt}{6pt}			% 标题1 段前12磅 段后6磅
+\titlespacing{\subsection}{0pt}{13pt}{13pt}			% 标题2 段前13磅 段后13磅
+\titlespacing{\subsubsection}{0pt}{13pt}{13pt}		% 标题3 段前13磅 段后13磅
+\titlespacing{\paragraph}{0pt}{13pt}{13pt}			% 标题4 段前13磅 段后13磅
+
+% 插入图片宏包
+\usepackage{graphicx}   
 
 
 \begin{document}
 	
+	% 封面
+	\input{contents/cover.tex}
+	
+	\newpage
 	\zhengwen
 	\section{第一节}
 	 	
@@ -48,7 +62,9 @@
 	\noindent 测试测试
 	
 	\section{第二节}
-	结果是
+	结果\ 是
+	
+	结果是结果
 	
 	\section{第三节}
 		
