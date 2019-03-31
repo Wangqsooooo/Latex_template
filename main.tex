@@ -1,10 +1,20 @@
 \documentclass[UTF8,a4paper,twoside]{ctexart}
 
+% 封面信息
+\newcommand{\stuname}{王秦松}			 	  % 学生姓名
+\newcommand{\stuid}{3150102980}		  		 % 学生学号
+\newcommand{\teaname}{李武华}		    	  % 指导教师
+\newcommand{\stugrade}{15级}			 		% 学生年级
+\newcommand{\stumajor}{电子信息工程} 	 		% 学生专业
+\newcommand{\stucollege}{电气工程学院} 		% 学生所在学院
+\newcommand{\stutitle}{毕业设计（论文）题目}	% 毕设题目
+
 % 页面设置
 % A4纸张大小 上下左边边距参考Word中"普通"类型
 \usepackage{geometry}	
 \geometry{left=3.18cm, right=3.18cm, top=2.54cm, bottom=2.54cm}
 % 设置首行缩进2字符
+% 使用 \noindent 命令可以取消缩进
 \usepackage{indentfirst}
 \setlength{\parindent}{2em}
 
@@ -19,6 +29,8 @@
 \newcommand{\zhengwen}{\CJKfamily{fs}\zihao{-4}}	% 正文字体 仿宋小4号
 \setCJKfamilyfont{STfs}{STFangsong}
 \newcommand{\cover}{\CJKfamily{STfs}\zihao{3}}
+\setCJKfamilyfont{song}{SimSun}
+\newcommand{\header}{\CJKfamily{song}\zihao{-5}}
 
 % 行距设置
 \usepackage{setspace}
@@ -32,7 +44,7 @@
 \titleformat{\subsubsection}[block]{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}}{0.5em}{}
 \titleformat{\paragraph}{\zihao{4}\bfseries}{\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}{0.5em}{}
 % 设置段间距
-\titlespacing{\section}{0pt}{12pt}{6pt}			% 标题1 段前12磅 段后6磅
+\titlespacing{\section}{0pt}{12pt}{6pt}				% 标题1 段前12磅 段后6磅
 \titlespacing{\subsection}{0pt}{13pt}{13pt}			% 标题2 段前13磅 段后13磅
 \titlespacing{\subsubsection}{0pt}{13pt}{13pt}		% 标题3 段前13磅 段后13磅
 \titlespacing{\paragraph}{0pt}{13pt}{13pt}			% 标题4 段前13磅 段后13磅
@@ -40,14 +52,57 @@
 % 插入图片宏包
 \usepackage{graphicx}   
 
+% 设置目录
+\usepackage{titletoc}
+\setcounter{tocdepth}{4}
+\renewcommand{\thesection}{\chinese{section}、}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{subsection}.\arabic{subsubsection}}
+\renewcommand{\theparagraph}{\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}
+\titlecontents{section}[2em]{\bfseries\zihao{-4}}{\contentslabel{2em}}{}{\titlerule*[0.5pc]{$\cdot$}\contentspage}
+\titlecontents{subsection}[2.5em]{\bfseries\zihao{-4}}{\contentslabel{1em}}{}{\titlerule*[0.5pc]{$\cdot$}\contentspage}
+\titlecontents{subsubsection}[4.5em]{\zihao{-4}}{\contentslabel{1.83em}}{}{\titlerule*[0.5pc]{$\cdot$}\contentspage}
+\titlecontents{paragraph}[5.5em]{\zihao{-4}}{\contentslabel{2.67em}}{}{\titlerule*[0.5pc]{$\cdot$}\contentspage}
+% 超链接
+% colorlinks=true 超链接以颜色表示 false 超链接以方框框出
+% linkcolor 指定颜色
+% CJKbookmarks 让链接支持中文
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,CJKbookmarks=true]{hyperref}	
+
+% 设置页眉页脚
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{Index}{
+	\setcounter{page}{1}\pagenumbering{Roman}
+	\fancyhead[L]{}
+	\fancyhead[R]{\header \stutitle}
+}
+\fancypagestyle{Content}{
+	\setcounter{page}{1}\pagenumbering{arabic}
+	\fancyhead[LO]{}
+	\fancyhead[RO]{\header \stutitle}
+	\fancyhead[LE]{\header 浙江大学本科生毕业论文}
+	\fancyhead[RE]{}
+	\fancyfoot[C]{\zihao{-5} \thepage}
+}
+
+% 设置参考文献
+\usepackage{natbib}
+
 
 \begin{document}
 	
 	% 封面
 	\input{contents/cover.tex}
 	
+	% 目录
 	\newpage
-	\zhengwen
+	\pagestyle{Index}
+	\tableofcontents
+	
+	% 正文
+	\newpage
+	\pagestyle{Content}\zhengwen
 	\section{第一节}
 	 	
 	\subsection{第一小节}
@@ -62,11 +117,18 @@
 	\noindent 测试测试
 	
 	\section{第二节}
-	结果\ 是
+	结果\ 是测试 \\ \\ \\
 	
-	结果是结果
+	结果是结果\cite{schweizer2013comparative}
 	
+	\newpage
 	\section{第三节}
-		
-
+	
+	% 参考文献
+	\newpage
+	\bibliographystyle{unsrt}
+	\phantomsection		% 要想目录中参考文献的超链接正确需要加这一语句
+	\addcontentsline{toc}{section}{参考文献}
+	\bibliography{reference/refs}
+			
 \end{document}
