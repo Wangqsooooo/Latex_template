@@ -1,18 +1,19 @@
 \documentclass[UTF8,a4paper,twoside]{ctexart}
 
 % 封面信息
-\newcommand{\stuname}{王秦松}			 	  % 学生姓名
-\newcommand{\stuid}{3150102980}		  		 % 学生学号
-\newcommand{\teaname}{李武华}		    	  % 指导教师
+\newcommand{\stuname}{王五}			 	  % 学生姓名
+\newcommand{\stuid}{3150000000}		  		 % 学生学号
+\newcommand{\teaname}{李四}		    	  % 指导教师
 \newcommand{\stugrade}{15级}			 		% 学生年级
 \newcommand{\stumajor}{电子信息工程} 	 		% 学生专业
 \newcommand{\stucollege}{电气工程学院} 		% 学生所在学院
-\newcommand{\stutitle}{毕业设计（论文）题目}	% 毕设题目
+\newcommand{\stutitle}{毕业设计题目}			% 毕设题目
 
 % 页面设置
-% A4纸张大小 上下左边边距参考Word中"普通"类型
+% A4纸张大小 上下左边边距参考Word中"适中"类型
+% A4纸张宽21cm 高29.7cm
 \usepackage{geometry}	
-\geometry{left=3.18cm, right=3.18cm, top=2.54cm, bottom=2.54cm}
+\geometry{left=1.91cm, right=1.91cm, top=2.54cm, bottom=2.54cm}
 % 设置首行缩进2字符
 % 使用 \noindent 命令可以取消缩进
 \usepackage{indentfirst}
@@ -24,13 +25,14 @@
 % 在cmd中输入fc-list :lang=zh >> d:\font.txt可以获取电脑中所有中文字体
 \setmainfont{Times New Roman}						% 缺省英文字体为Times New Roman
 \setCJKmainfont[BoldFont=SimHei]{FangSong}			% 缺省中文字体为 仿宋
-													% 粗体为中文字体 黑体
+% 粗体为中文字体 黑体
 \setCJKfamilyfont{fs}{FangSong}
 \newcommand{\zhengwen}{\CJKfamily{fs}\zihao{-4}}	% 正文字体 仿宋小4号
 \setCJKfamilyfont{STfs}{STFangsong}
 \newcommand{\cover}{\CJKfamily{STfs}\zihao{3}}
 \setCJKfamilyfont{song}{SimSun}
 \newcommand{\header}{\CJKfamily{song}\zihao{-5}}
+\newcommand{\imageortable}{\CJKfamily{song}\zihao{5}\bfseries}
 
 % 行距设置
 \usepackage{setspace}
@@ -50,7 +52,24 @@
 \titlespacing{\paragraph}{0pt}{13pt}{13pt}			% 标题4 段前13磅 段后13磅
 
 % 插入图片宏包
-\usepackage{graphicx}   
+% 多个浮动体连续排布用参数H进行固定，如下所示，不用H会出现难以预料的排布
+% \begin{figure}[H]
+% content...
+% \end{figure}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{caption}
+\usepackage{float}
+\captionsetup{labelsep=quad,labelfont=bf,font=singlespacing}
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+
+% 插入表格宏包
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\usepackage{enumerate}
 
 % 设置目录
 \usepackage{titletoc}
@@ -67,7 +86,10 @@
 % colorlinks=true 超链接以颜色表示 false 超链接以方框框出
 % linkcolor 指定颜色
 % CJKbookmarks 让链接支持中文
-\usepackage[colorlinks=true,linkcolor=black,citecolor=black,CJKbookmarks=true]{hyperref}	
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,CJKbookmarks=true]{hyperref}
+\newcommand{\myeqref}[1]{式 (\ref{#1})}
+\newcommand{\mytaref}[1]{表 \ref{#1}}
+\newcommand{\myfiref}[1]{图 \ref{#1}}
 
 % 设置页眉页脚
 \usepackage{fancyhdr}
@@ -89,6 +111,10 @@
 % 设置参考文献
 \usepackage{natbib}
 
+% 插入公式
+\usepackage{amsmath}
+\usepackage{indentfirst}
+
 
 \begin{document}
 	
@@ -102,27 +128,10 @@
 	
 	% 正文
 	\newpage
-	\pagestyle{Content}\zhengwen
-	\section{第一节}
-	 	
-	\subsection{第一小节}
-	这是\LaTeX。
-		
-	\noindent 测试测试
-	
-	\subsubsection{第一小小节}
-	测试
-	
-	\paragraph{第一段}
-	\noindent 测试测试
-	
-	\section{第二节}
-	结果\ 是测试 \\ \\ \\
-	
-	结果是结果\cite{schweizer2013comparative}
-	
-	\newpage
-	\section{第三节}
+	\input{contents/Introduction.tex}
+	\input{contents/Report.tex}
+	\input{contents/Translation.tex}
+	\input{contents/Original.tex}
 	
 	% 参考文献
 	\newpage
